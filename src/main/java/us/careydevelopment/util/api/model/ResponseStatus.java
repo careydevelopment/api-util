@@ -1,16 +1,14 @@
 package us.careydevelopment.util.api.model;
 
 public class ResponseStatus {
-
-    public static enum StatusCode { OK, ERROR };
 	
-    private StatusCode statusCode;
+    private ResponseStatusCode statusCode;
     private String message;
 	
-    public StatusCode getStatusCode() {
+    public ResponseStatusCode getStatusCode() {
         return statusCode;
     }
-    public void setStatusCode(StatusCode statusCode) {
+    public void setStatusCode(ResponseStatusCode statusCode) {
         this.statusCode = statusCode;
     }
     public String getMessage() {

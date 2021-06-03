@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import us.careydevelopment.util.api.model.ResponseStatus;
+import us.careydevelopment.util.api.model.ResponseStatusCode;
 
 
 public class ResponseWriterUtil {
@@ -29,14 +30,30 @@ public class ResponseWriterUtil {
 	
     public static void writeErrorResponse(HttpServletResponse response, String message) {
         ResponseStatus status = new ResponseStatus();
-        status.setStatusCode(ResponseStatus.StatusCode.ERROR);
+        status.setStatusCode(ResponseStatusCode.ERROR);
         status.setMessage(message);
 		
         try (PrintWriter writer = response.getWriter()) {
             String json = new ObjectMapper().writeValueAsString(status);
 			
             writer.write(json);
-			writer.flush();
+            writer.flush();
+        } catch (IOException ie) {
+            LOG.error("Problem writing output to response!", ie);
+        }
+    }
+    
+    
+    public static void writeResponse(HttpServletResponse response, String message, ResponseStatusCode statusCode) {
+        ResponseStatus status = new ResponseStatus();
+        status.setStatusCode(statusCode);
+        status.setMessage(message);
+                
+        try (PrintWriter writer = response.getWriter()) {
+            String json = new ObjectMapper().writeValueAsString(status);
+                        
+            writer.write(json);
+            writer.flush();
         } catch (IOException ie) {
             LOG.error("Problem writing output to response!", ie);
         }
