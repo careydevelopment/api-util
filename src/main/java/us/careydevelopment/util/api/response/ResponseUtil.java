@@ -8,11 +8,25 @@ public class ResponseUtil {
     
     private static final String TOO_MANY_FAILED_LOGINS = "Too many failed login attempts. Please try again tomorrow.";
     private static final String UNAUTHORIZED_ORIGIN = "You're not allowed to access this resource from that origin.";
-
-            
+    private static final String TOO_MANY_FAILED_IP_LOGINS = "Your IP address has failed authentication too many times today.";
+    private static final String INVALID_CREDENTIALS = "Invalid credentials";
+    
+    
     public static void tooManyFailedLogins(HttpServletResponse response) {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); 
         sendResponse(response, TOO_MANY_FAILED_LOGINS);
+    }
+    
+    
+    public static void invalidCredentials(HttpServletResponse response) {
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); 
+        sendResponse(response, INVALID_CREDENTIALS);
+    }
+    
+    
+    public static void tooManyFailedIpLogins(HttpServletResponse response) {
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); 
+        sendResponse(response, TOO_MANY_FAILED_IP_LOGINS);
     }
     
     
