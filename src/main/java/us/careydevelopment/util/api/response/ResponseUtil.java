@@ -48,7 +48,7 @@ public class ResponseUtil {
         ResponseStatusCode statusCode = ResponseStatusCode.OK;
         
         if (response.getStatus() == HttpServletResponse.SC_UNAUTHORIZED || 
-                response.getStatus() == HttpServletResponse.SC_FORBIDDEN) {
+            response.getStatus() == HttpServletResponse.SC_FORBIDDEN) {
             statusCode = ResponseStatusCode.UNAUTHORIZED;
         } else if (response.getStatus() > 399) {
             statusCode = ResponseStatusCode.ERROR;
