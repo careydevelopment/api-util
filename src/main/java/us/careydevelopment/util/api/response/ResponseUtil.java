@@ -2,9 +2,15 @@ package us.careydevelopment.util.api.response;
 
 import java.nio.charset.StandardCharsets;
 import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import us.careydevelopment.util.api.model.ResponseStatusCode;
 
 public class ResponseUtil {
+    
+    private static final Logger LOG = LoggerFactory.getLogger(ResponseUtil.class);
     
     private static final String TOO_MANY_FAILED_LOGINS = "Too many failed login attempts. Please try again tomorrow.";
     private static final String UNAUTHORIZED_ORIGIN = "You're not allowed to access this resource from that origin.";
@@ -13,24 +19,32 @@ public class ResponseUtil {
     
     
     public static void tooManyFailedLogins(HttpServletResponse response) {
+        LOG.error("Unauthorized because of too many logins");
+        
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); 
         sendResponse(response, TOO_MANY_FAILED_LOGINS);
     }
     
     
     public static void invalidCredentials(HttpServletResponse response) {
+        LOG.error("Unauthorized because of invalid credentials");
+        
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); 
         sendResponse(response, INVALID_CREDENTIALS);
     }
     
     
     public static void tooManyFailedIpLogins(HttpServletResponse response) {
+        LOG.error("Unauthorized because of too many failed ip logins");
+        
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); 
         sendResponse(response, TOO_MANY_FAILED_IP_LOGINS);
     }
     
     
     public static void badOrigin(HttpServletResponse response) {
+        LOG.error("Unauthorized because of bad origin");
+        
         response.setStatus(HttpServletResponse.SC_FORBIDDEN); 
         sendResponse(response, UNAUTHORIZED_ORIGIN);
     }
