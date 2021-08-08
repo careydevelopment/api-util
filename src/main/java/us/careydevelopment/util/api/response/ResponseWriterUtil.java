@@ -6,7 +6,6 @@ import java.nio.charset.StandardCharsets;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.parser.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
