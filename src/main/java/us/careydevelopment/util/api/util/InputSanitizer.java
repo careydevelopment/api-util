@@ -24,7 +24,7 @@ public class InputSanitizer {
                     try {
                         String value = (String)method.invoke(obj);
                         if (value != null) {
-                            value = value.replaceAll("[^A-Za-z0-9 '/&#,.-]","").trim();
+                            value = value.replaceAll("[^A-Za-z0-9 +@'/&#,.-]","").trim();
                             Method setter = getEquivalentSetter(name, klazz);
                             setter.invoke(obj, value);    
                         }
