@@ -1,4 +1,4 @@
-package us.careydevelopment.util.api.util;
+package us.careydevelopment.util.api.input;
 
 import java.lang.reflect.Method;
 

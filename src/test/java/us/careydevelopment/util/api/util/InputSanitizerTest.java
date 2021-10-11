@@ -3,6 +3,7 @@ package us.careydevelopment.util.api.util;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import us.careydevelopment.util.api.input.InputSanitizer;
 import us.careydevelopment.util.api.model.ValidationError;
 
 public class InputSanitizerTest {
