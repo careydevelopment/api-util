@@ -29,6 +29,16 @@ public class ResponseEntityUtil {
         
         return createResponseEntity(fullResponse);
     }
+
+    public static ResponseEntity<IRestResponse<Void>> createSuccessfulResponseEntity(String message, int httpStatusCode) {
+        ResponseStatus status = getSuccessResponseStatus(message);
+        
+        RestResponse<Void> fullResponse = new RestResponse<>();
+        fullResponse.setResponseStatus(status);
+        fullResponse.setHttpStatusCode(httpStatusCode);
+        
+        return createResponseEntity(fullResponse);
+    }
     
     public static ResponseEntity<IRestResponse<Void>> createResponseEntityWithError(String message, int httpStatusCode) {
         ResponseStatus status = getErrorResponseStatus(message);
@@ -39,8 +49,18 @@ public class ResponseEntityUtil {
         
         return createResponseEntity(fullResponse);
     }
+
+    public static ResponseEntity<IRestResponse<Void>> createResponseEntityWithUnauthorized(String message) {
+        ResponseStatus status = getUnauthorizedResponseStatus(message);
+        
+        RestResponse<Void> fullResponse = new RestResponse<>();
+        fullResponse.setResponseStatus(status);
+        fullResponse.setHttpStatusCode(HttpStatus.UNAUTHORIZED.value());
+        
+        return createResponseEntity(fullResponse);
+    }
     
-    public static ResponseEntity<?> createResponseEntityWithError(String message, HttpStatus httpStatus) {
+    public static ResponseEntity<IRestResponse<Void>> createResponseEntityWithError(String message, HttpStatus httpStatus) {
         return createResponseEntityWithError(message, httpStatus.value());
     }
     
@@ -58,19 +78,22 @@ public class ResponseEntityUtil {
         return createResponseEntity(fullResponse);
     }
     
-    private static ResponseStatus getErrorResponseStatus(String message) {
-        ResponseStatus status = new ResponseStatus();
-        status.setMessage(message);
-        status.setStatusCode(ResponseStatusCode.ERROR);
-        
-        return status;
+    private static ResponseStatus getUnauthorizedResponseStatus(String message) {
+        return getResponseStatus(message, ResponseStatusCode.UNAUTHORIZED);
     }
     
-    
     private static ResponseStatus getSuccessResponseStatus(String message) {
+        return getResponseStatus(message, ResponseStatusCode.OK);
+    }
+    
+    private static ResponseStatus getErrorResponseStatus(String message) {
+        return getResponseStatus(message, ResponseStatusCode.ERROR);
+    }
+    
+    private static ResponseStatus getResponseStatus(String message, ResponseStatusCode code) {
         ResponseStatus status = new ResponseStatus();
         status.setMessage(message);
-        status.setStatusCode(ResponseStatusCode.OK);
+        status.setStatusCode(code);
         
         return status;
     }

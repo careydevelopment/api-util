@@ -7,26 +7,34 @@ import org.springframework.validation.BindingResult;
 
 import us.careydevelopment.util.api.model.ValidationError;
 
-
 public class ValidationUtil {
-   
+
     public static List<ValidationError> convertBindingResultToValidationErrors(BindingResult bindingResult) {
         List<ValidationError> errors = new ArrayList<>();
-        
+
         if (bindingResult != null) {
             bindingResult.getFieldErrors().forEach(violation -> {
                 String message = violation.getDefaultMessage();
                 String field = violation.getField();
-                
+
                 ValidationError error = new ValidationError();
-                //error.setCode(field);
+                // error.setCode(field);
                 error.setDefaultMessage(message);
                 error.setField(field);
-                
+
                 errors.add(error);
             });
         }
-        
+
         return errors;
+    }
+
+    public static void addError(List<ValidationError> errors, String errorMessage, String field, String code) {
+        ValidationError validationError = new ValidationError();
+        validationError.setCode(code);
+        validationError.setDefaultMessage(errorMessage);
+        validationError.setField(field);
+
+        errors.add(validationError);
     }
 }
