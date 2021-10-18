@@ -1,4 +1,4 @@
-package us.careydevelopment.util.api.util;
+package us.careydevelopment.util.api.input;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
